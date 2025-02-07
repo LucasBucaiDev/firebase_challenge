@@ -11,29 +11,27 @@ class AuthCubit extends Cubit<AuthState> {
   final ChallengeRepository _challengeRepository;
 
   void checkCurrentUser() {
-    if (_challengeRepository.currentUser != null) {
-      emit(AuthState.authenticated(user: _challengeRepository.currentUser!));
-    } else {
-      emit(AuthState.unauthenticated());
-    }
+    _challengeRepository.currentUser.fold(
+      () => emit(AuthState.unauthenticated()),
+      (user) => emit(AuthState.authenticated(user: user)),
+    );
   }
 
   Future<void> loginWithGoogle() async {
-    try {
-      await _challengeRepository.loginWithGoogle();
-      emit(AuthState.authenticated(user: _challengeRepository.currentUser!));
-    } catch (e) {
-      emit(AuthState.unauthenticated(failure: e.toString()));
-    }
+    final result = await _challengeRepository.loginWithGoogle();
+    result.fold(
+      (failure) => emit(AuthState.unauthenticated(failure: failure.toString())),
+      (user) => emit(AuthState.authenticated(user: user)),
+    );
   }
 
   Future<void> loginWithCredentials(String email, String password) async {
-    try {
-      await _challengeRepository.loginWithCredentials(email, password);
-      emit(AuthState.authenticated(user: _challengeRepository.currentUser!));
-    } catch (e) {
-      emit(AuthState.unauthenticated(failure: e.toString()));
-    }
+    final result =
+        await _challengeRepository.loginWithCredentials(email, password);
+    result.fold(
+      (failure) => emit(AuthState.unauthenticated(failure: failure.toString())),
+      (user) => emit(AuthState.authenticated(user: user)),
+    );
   }
 
   Future<void> logout() async {

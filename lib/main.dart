@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:challenge_repository/challenge_repository.dart';
 import 'package:challenge_service/challenge_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';

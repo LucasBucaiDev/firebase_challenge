@@ -1,4 +1,5 @@
 import 'package:challenge_service/challenge_service.dart';
+import 'package:fpdart/fpdart.dart';
 
 class ChallengeRepository {
   const ChallengeRepository({
@@ -7,29 +8,23 @@ class ChallengeRepository {
 
   final ChallengeService challengeService;
 
-  Future<void> loginWithGoogle() async {
-    try {
-      await challengeService.loginWithGoogle();
-    } catch (e) {
-      throw Exception(e);
-    }
+  Future<Either<Exception, User>> loginWithGoogle() {
+    return challengeService.loginWithGoogle();
   }
 
-  Future<void> loginWithCredentials(String email, String password) async {
-    try {
-      await challengeService.loginWithCredentials(email, password);
-    } catch (e) {
-      throw Exception(e);
-    }
+  Future<Either<Exception, User>> loginWithCredentials(
+    String email,
+    String password,
+  ) {
+    return challengeService.loginWithCredentials(email, password);
   }
 
-  Future<void> logout() async {
-    try {
-      await challengeService.logout();
-    } catch (e) {
-      throw Exception(e);
-    }
+  Future<Either<Exception, void>> logout() {
+    return TaskEither.tryCatch(
+      () async => challengeService.logout(),
+      (error, _) => Exception(error.toString()),
+    ).run();
   }
 
-  User? get currentUser => challengeService.currentUser;
+  Option<User> get currentUser => challengeService.currentUser;
 }
