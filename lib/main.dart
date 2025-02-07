@@ -1,9 +1,13 @@
+import 'package:challenge_repository/challenge_repository.dart';
+import 'package:challenge_service/challenge_service.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_challenge/app/app.dart';
 import 'package:firebase_challenge/auth/auth.dart';
 import 'package:firebase_challenge/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +16,17 @@ void main() async {
   );
   Bloc.observer = SimpleBlocObserver();
 
-  runApp(const App());
+  final challengeService = ChallengeService(
+    firebaseAuth: FirebaseAuth.instance,
+    googleSignIn: GoogleSignIn(),
+  );
+  final challengeRepository = ChallengeRepository(
+    challengeService: challengeService,
+  );
+
+  runApp(App(
+    challengeRepository: challengeRepository,
+  ));
 }
 
 class SimpleBlocObserver extends BlocObserver {
