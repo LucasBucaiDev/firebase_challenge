@@ -1,0 +1,66 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "firebase_challenge",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart"
+        },
+        {
+            "name": "firebase_challenge (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "firebase_challenge (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "challenge_repository",
+            "cwd": "packages/challenge_repository",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "challenge_repository (profile mode)",
+            "cwd": "packages/challenge_repository",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "challenge_repository (release mode)",
+            "cwd": "packages/challenge_repository",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "challenge_service",
+            "cwd": "packages/challenge_service",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "challenge_service (profile mode)",
+            "cwd": "packages/challenge_service",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "challenge_service (release mode)",
+            "cwd": "packages/challenge_service",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
